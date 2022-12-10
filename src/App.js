@@ -42,12 +42,24 @@ function App() {
     });
   };
 
+  const onCardClick = (champion) => {
+    if (!champions.championList.includes(champion)) {
+      setScore({
+        currentScore: score.currentScore + 1,
+        highestScore: 0,
+      });
+    }
+  };
+
   return (
     <div className="App">
       <div>
         <Header score={score} />
-        <button onClick={() => selectChampions(20)}>Fetch!</button>
-        <SelectedChampion selectedChampions={champions.selectedChampions} />
+        <button onClick={() => selectChampions(5)}>Fetch!</button>
+        <SelectedChampion
+          selectedChampions={champions.selectedChampions}
+          onCardClick={onCardClick}
+        />
       </div>
     </div>
   );

@@ -1,8 +1,12 @@
 import "../styles/SelectedChampions.css";
-export default function SelectedChampion({ selectedChampions }) {
+export default function SelectedChampion({ selectedChampions, onCardClick }) {
   const rendered = selectedChampions.map((champ) => {
     return (
-      <div key={champ.championName + "_rd"} className="champion-card">
+      <div
+        key={champ.championName + "_rd"}
+        className="champion-card"
+        onClick={onCardClick}
+      >
         <img
           src={champ.loadingScreenImageURL}
           alt={"image of " + champ.championName}
