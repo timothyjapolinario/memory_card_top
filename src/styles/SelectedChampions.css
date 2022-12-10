@@ -1,0 +1,19 @@
+.champion-card > img {
+  padding: 0;
+  margin: 0;
+  height: 250px;
+  width: 130px;
+}
+.champion-card {
+  padding: 10px;
+  background-color: rgb(6, 1, 53);
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+}
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
