@@ -5,7 +5,7 @@ export default function SelectedChampion({ selectedChampions, onCardClick }) {
       <div
         key={champ.championName + "_rd"}
         className="champion-card"
-        onClick={onCardClick}
+        onClick={() => onCardClick(champ)}
       >
         <img
           src={champ.loadingScreenImageURL}

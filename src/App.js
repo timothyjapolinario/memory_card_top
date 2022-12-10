@@ -11,6 +11,7 @@ function App() {
   const [champions, setChampions] = useState({
     championList: [],
     selectedChampions: [],
+    guessedChampions: [],
   });
   const [score, setScore] = useState({
     currentScore: 0,
@@ -22,6 +23,7 @@ function App() {
       setChampions({
         championList: allChampions,
         selectedChampions: [],
+        guessedChampions: [],
       });
     })();
   }, []);
@@ -39,11 +41,17 @@ function App() {
     setChampions({
       championList: champions.championList,
       selectedChampions: newSelectedChampions,
+      guessedChampions: [],
     });
   };
 
   const onCardClick = (champion) => {
-    if (!champions.championList.includes(champion)) {
+    console.log(champion);
+    if (!champions.guessedChampions.includes(champion)) {
+      setChampions({
+        ...champions,
+        guessedChampions: champions.guessedChampions.concat(champion),
+      });
       setScore({
         currentScore: score.currentScore + 1,
         highestScore: 0,
