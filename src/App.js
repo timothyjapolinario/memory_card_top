@@ -79,7 +79,10 @@ function App() {
 
       setScore({
         currentScore: score.currentScore + 1,
-        highestScore: 0,
+        highestScore:
+          score.highestScore <= score.currentScore + 1
+            ? score.currentScore + 1
+            : score.highestScore,
         stageScore: score.stageScore + 1,
         gameOver: false,
       });
@@ -87,7 +90,7 @@ function App() {
       //Gameover
       setScore({
         currentScore: 0,
-        highestScore: 0,
+        highestScore: score.highestScore,
         stageScore: 0,
         gameOver: true,
       });
