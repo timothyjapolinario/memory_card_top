@@ -48,6 +48,13 @@ function App() {
     }
   }, [score, champions]);
 
+  //Gameover
+  useEffect(() => {
+    if (score.gameOver === true) {
+      setScore({ ...score, gameOver: false });
+      selectChampions(5);
+    }
+  }, [score.gameOver]);
   const selectChampions = (count) => {
     //shuffle the list
     //Destructure it since the sort method in shuffleArray is destructive
@@ -69,6 +76,7 @@ function App() {
         selectedChampions: shuffleArray(champions.selectedChampions),
         guessedChampions: champions.guessedChampions.concat(champion),
       });
+
       setScore({
         currentScore: score.currentScore + 1,
         highestScore: 0,
