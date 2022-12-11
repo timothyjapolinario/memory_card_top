@@ -1,5 +1,4 @@
 async function fetchAllChampionInfo() {
-  console.log("FETCHIN DATA!");
   try {
     const championInfos = await fetch(
       "http://ddragon.leagueoflegends.com/cdn/12.23.1/data/en_US/champion.json"

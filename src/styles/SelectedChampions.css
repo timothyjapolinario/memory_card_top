@@ -12,6 +12,7 @@
   border-radius: 5px;
 }
 .card-list {
+  margin-top: 2vh;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;

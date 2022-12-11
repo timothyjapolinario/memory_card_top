@@ -16,7 +16,10 @@ function App() {
   const [score, setScore] = useState({
     currentScore: 0,
     highestScore: 0,
+    stageScore: 0,
+    gameOver: false,
   });
+  //Cache all champions in a list
   useEffect(() => {
     (async () => {
       const allChampions = await getAllChampions();
@@ -28,9 +31,22 @@ function App() {
     })();
   }, []);
 
+  //Initialize selected champions after fetching all champions from API
   useEffect(() => {
-    console.log(champions);
-  }, [champions]);
+    selectChampions(5);
+  }, [champions.championList]);
+
+  //Update score when card is clicked
+  useEffect(() => {
+    const selChampsLength = champions.selectedChampions.length;
+    if (selChampsLength !== 0 && score.stageScore === selChampsLength) {
+      setScore({
+        ...score,
+        stageScore: 0,
+      });
+      selectChampions(champions.selectedChampions.length + 5);
+    }
+  }, [score, champions]);
 
   const selectChampions = (count) => {
     //shuffle the list
@@ -46,15 +62,26 @@ function App() {
   };
 
   const onCardClick = (champion) => {
-    console.log(champion);
     if (!champions.guessedChampions.includes(champion)) {
+      //Add score
       setChampions({
         ...champions,
+        selectedChampions: shuffleArray(champions.selectedChampions),
         guessedChampions: champions.guessedChampions.concat(champion),
       });
       setScore({
         currentScore: score.currentScore + 1,
         highestScore: 0,
+        stageScore: score.stageScore + 1,
+        gameOver: false,
+      });
+    } else {
+      //Gameover
+      setScore({
+        currentScore: 0,
+        highestScore: 0,
+        stageScore: 0,
+        gameOver: true,
       });
     }
   };
@@ -63,7 +90,6 @@ function App() {
     <div className="App">
       <div>
         <Header score={score} />
-        <button onClick={() => selectChampions(5)}>Fetch!</button>
         <SelectedChampion
           selectedChampions={champions.selectedChampions}
           onCardClick={onCardClick}
