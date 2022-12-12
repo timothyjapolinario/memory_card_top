@@ -1,11 +1,8 @@
+import champions from "../champions.json";
+console.log(champions);
 async function fetchAllChampionInfo() {
   try {
-    const championInfos = await fetch(
-      "http://ddragon.leagueoflegends.com/cdn/12.23.1/data/en_US/champion.json"
-    ).then((response) => {
-      return response.json();
-    });
-    return championInfos.data;
+    return champions.data;
   } catch (error) {
     console.log("Error Fetching All Champion Information: " + error);
   }
